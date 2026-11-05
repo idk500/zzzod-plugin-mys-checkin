@@ -33,7 +33,8 @@ python mys_checkin/mys_login.py status    # 核对登录态与权限
 
 ### 隐私
 
-- 手机号只在本次进程内存里使用：**不进命令行参数**（避免 shell 历史与进程列表泄露）、**不写入 config.json**、终端回显省略为 `<已隐藏>`
+- 手机号只在本次进程内存里使用：**不进命令行参数**（避免 shell 历史与进程列表泄露）、**不写入 config.json**
+- 终端回显只保留前 3 位，其余位一律不打印
 - `config.json` 只存 stoken / uid / mid / device_id 等凭据，且已被 `.gitignore` 排除
 - 发送验证码若被人机验证拦下（retcode `-3101`），去 [user.mihoyo.com](https://user.mihoyo.com/#/login) 用同一手机号过滑块并点「获取验证码」（**不要点登录**），把收到的 6 位码输回插件即可，登录照样能完成
 
@@ -61,6 +62,8 @@ python mys_checkin/mys_login.py status    # 核对登录态与权限
 - 本插件不读取、不上传任何游戏内数据
 
 ## 更新记录
+
+- **0.1.4**：登录模块与文档中的号码回显统一为省略号形式
 
 - **0.1.3**：封面改为红紫金配色并统一到 `assets/ui/cover.png`（与其余插件同版式同路径：左侧标题栏 + 右侧环形主体），logo 一并移入 `assets/ui/`
 

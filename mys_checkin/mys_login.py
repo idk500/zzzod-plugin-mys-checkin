@@ -8,7 +8,7 @@
 
 隐私约定：
   手机号只在本次进程内存里使用 —— 不进命令行参数（避免 shell 历史与进程列表
-  泄露）、不写入 config.json、不打印明文（终端回显为 <已隐藏>）。
+  泄露）、不写入 config.json、不打印明文（终端回显只保留前 3 位）。
 
 用法::
 
@@ -41,8 +41,8 @@ def load_core():
 
 
 def mask(mobile: str) -> str:
-    """省略号形式的显示。"""
-    return mobile[:3] + "****" + mobile[-4:] if len(mobile) >= 8 else "***"
+    """只保留前 3 位，其余全部隐去。"""
+    return mobile[:3] + "*" * (len(mobile) - 3) if len(mobile) >= 8 else "***"
 
 
 def do_login() -> int:
