@@ -14,8 +14,11 @@ class MysCheckinConfig(ApplicationConfig):
 
     @property
     def probe_mode(self) -> bool:
-        """探测模式: 只运行 checkin.py test 查询登录/签到状态, 不执行真实签到"""
-        return self.get('probe_mode', True)
+        """探测模式: 只运行 checkin.py test 查询登录/签到状态, 不执行真实签到
+
+        默认关闭 —— 开着等于只查不签，装完静默无产出比报错更难排查。
+        """
+        return self.get('probe_mode', False)
 
     @probe_mode.setter
     def probe_mode(self, new_value: bool) -> None:
