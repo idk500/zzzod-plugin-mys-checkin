@@ -2,6 +2,8 @@
 
 一条龙运行时顺便完成米游社每日签到，全程不操作游戏（纯网络请求，子进程托管）。
 
+![cover](mys_checkin/assets/cover.webp)
+
 ## 功能
 
 - **游戏签到领福利**：绝区零 / 原神 / 崩坏:星穹铁道 / 崩坏3，自动识别全部已绑定角色
@@ -16,21 +18,33 @@
 
 ## 首次使用（只需一次登录）
 
-二选一：
+在本插件目录执行命令（或使用上游 GUI）：
 
-1. **上游图形界面**：克隆/下载 [DailyCheckIn](https://github.com/Maratrain/DailyCheckIn)，运行其 GUI 扫码或短信登录，把生成的 `config.json` 复制到本插件的 `mys_checkin/vendor/` 目录；
-2. **命令行**：在本插件目录执行 `python mys_checkin/vendor/checkin.py login`，按提示短信/扫码登录（米游币打卡+游戏签到全部可用选短信登录；扫码登录 2026-09 起仅游戏签到可用）。
+```bash
+python mys_checkin/vendor/checkin.py login
+```
 
-登录状态存储在 `vendor/config.json`（含 stoken 等凭据，**已被 .gitignore 排除，不会提交**）。
+登录状态存储在 `mys_checkin/vendor/config.json`（含 stoken 等凭据，**已被 .gitignore 排除，不会提交**）。
+
+### 两种登录方式，权限不一样（重要）
+
+| 方式 | 游戏签到 | 米游币打卡 | 说明 |
+| --- | --- | --- | --- |
+| **短信验证码**（推荐） | ✅ | ✅ | 拿到完整权限 stoken，功能全开 |
+| App 扫码 | ✅ | ❌ | 2026-09 起米哈游限制了扫码 stoken 权限，米游币接口会直接报无权限 |
+
+> 只想要游戏签到的话可以选扫码；想连米游币一起签，必须走短信登录。
+>
+> **两者不要混着配**：如果你用扫码登录，请把 `config.json` 里的 `mihoyo.bbs_checkin` 设为 `false`。否则米游币打卡必然失败，脚本退出码会变成 1，插件会把整轮判为失败（此时游戏签到其实已经成功）。
 
 ## 配置
 
 | 配置项 | 默认 | 说明 |
 | --- | --- | --- |
-| probe_mode | 开 | 只运行 `checkin.py test` 查询登录/签到状态，不真实签到 |
+| probe_mode | 关 | 打开后只运行 `checkin.py test` 查询登录/签到状态，不真实签到。仅用于排查，长期开着等于没签 |
 | timeout_seconds | 300 | 子进程超时（米游币多分区打卡较慢，可调大） |
 
-签到游戏列表 / 米游币开关 / 库街区开关在 `vendor/config.json` 中调整（`mihoyo.game_sign`、`bbs_checkin`、`kuro.enabled`）。
+签到游戏列表 / 米游币开关 / 库街区开关在 `mys_checkin/vendor/config.json` 中调整：`mihoyo.game_sign`、`mihoyo.bbs_checkin`、`kuro.enabled`、`weibo.enabled`。
 
 ## 运行结果
 
@@ -38,11 +52,16 @@
 
 ## 风险说明
 
-- 凭据（stoken/cookie）保存在本机 `vendor/config.json`，请勿外传
+- 凭据（stoken/cookie）保存在本机 `mys_checkin/vendor/config.json`，请勿外传
 - 签到接口由上游工具维护，米哈游风控变化时需跟进上游更新
 - 本插件不读取、不上传任何游戏内数据
+
+## 更新记录
+
+- **0.1.1**：新增封面与透明 logo；README 补充「扫码 vs 短信」权限差异与 `bbs_checkin` 联动说明；`probe_mode` 默认改为关闭（原默认打开会导致装完只查不签、静默无产出）
+- **0.1.0**：首版，vendored DailyCheckIn 内核，probe 默认开，state 防重签
 
 ## 许可
 
 - 本插件：见 [LICENSE](LICENSE)（GPL-3.0）
-- vendored checkin.py：MIT License（见 vendor/LICENSE）
+- vendored checkin.py：MIT License（见 mys_checkin/vendor/LICENSE）
