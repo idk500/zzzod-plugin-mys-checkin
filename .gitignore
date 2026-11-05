@@ -1,0 +1,6 @@
+# 用户凭据与运行状态，永不入库
+mys_checkin/vendor/config.json
+mys_checkin/vendor/state.json
+mys_checkin/vendor/logs/
+__pycache__/
+*.pyc

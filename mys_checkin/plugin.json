@@ -1,0 +1,23 @@
+{
+  "id": "mys_checkin",
+  "name": "米游社签到",
+  "summary": "一条龙运行时顺便完成米游社每日签到：游戏签到领福利（绝区零/原神/星穹铁道/崩坏3）+ 米游币打卡，可选库街区（鸣潮/战双）。内核为 DailyCheckIn 单文件工具（MIT，零抓包扫码/短信登录），state.json 当日防重签，stoken 自动续期 cookie_token。probe 模式默认开启（只查登录状态不签到）。首次使用需在本机登录一次。",
+  "version": "0.1.0",
+  "versionCode": 1,
+  "defaultGroup": true,
+  "needNotify": true,
+  "author": {
+    "name": "idk500",
+    "url": "https://github.com/idk500"
+  },
+  "homepage": "https://github.com/idk500/zzzod-plugin-mys-checkin",
+  "risk": [
+    "automation"
+  ],
+  "compatibility": {
+    "minAppVersion": "0.0.0",
+    "minCoreApiVersion": 1,
+    "python": ">=3.11"
+  },
+  "apps": []
+}
