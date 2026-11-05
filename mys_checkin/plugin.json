@@ -1,9 +1,9 @@
 {
   "id": "mys_checkin",
   "name": "米游社签到",
-  "summary": "一条龙运行时顺便完成米游社每日签到：游戏签到领福利（绝区零/原神/星穹铁道/崩坏3）+ 米游币打卡，可选库街区（鸣潮/战双）。内核为 DailyCheckIn 单文件工具（MIT，零抓包登录），state.json 当日防重签，stoken 自动续期 cookie_token。短信登录可拿满权限；扫码登录仅够游戏签到。首次使用需在本机登录一次。",
-  "version": "0.1.1",
-  "versionCode": 2,
+  "summary": "一条龙运行时顺便完成米游社每日签到：游戏签到领福利（绝区零/原神/星穹铁道/崩坏3）+ 米游币打卡，可选库街区（鸣潮/战双）。内核为 DailyCheckIn 单文件工具（MIT），state.json 当日防重签，stoken 自动续期 cookie_token。仅手机号验证码登录（插件自带交互入口，号码不落盘），首次使用需在本机登录一次。",
+  "version": "0.1.2",
+  "versionCode": 3,
   "cover": "assets/cover.webp",
   "defaultGroup": true,
   "needNotify": true,
