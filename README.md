@@ -2,7 +2,7 @@
 
 一条龙运行时顺便完成米游社每日签到，全程不操作游戏（纯网络请求，子进程托管）。
 
-![cover](mys_checkin/assets/cover.webp)
+![cover](mys_checkin/assets/ui/cover.png)
 
 ## 功能
 
@@ -61,6 +61,8 @@ python mys_checkin/mys_login.py status    # 核对登录态与权限
 - 本插件不读取、不上传任何游戏内数据
 
 ## 更新记录
+
+- **0.1.3**：封面改为红紫金配色并统一到 `assets/ui/cover.png`（与其余插件同版式同路径：左侧标题栏 + 右侧环形主体），logo 一并移入 `assets/ui/`
 
 - **0.1.2**：新增 `mys_login.py` 登录入口，只做手机号验证码登录（号码不落盘、不进命令行参数、回显省略），README 与摘要同步收敛为「仅手机号登录」；移除打包内冗余的 `assets/cover.png`
 - **0.1.1**：新增封面与透明 logo；README 补充「扫码 vs 短信」权限差异与 `bbs_checkin` 联动说明；`probe_mode` 默认改为关闭（原默认打开会导致装完只查不签、静默无产出）
