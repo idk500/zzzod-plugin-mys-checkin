@@ -90,11 +90,17 @@ class MysCheckinApp(ZApplication):
         log.info('[米游社签到] 执行: %s (超时 %ds)', ' '.join(cmd[1:]),
                  self.config.timeout_seconds)
         self.proc_output = []
+        # 子进程默认按系统代码页(GBK)输出中文，主进程按 UTF-8 解码会变成乱码。
+        # 强制子进程用 UTF-8，签到明细才能在一条龙日志里正常阅读。
+        child_env = dict(os.environ)
+        child_env['PYTHONIOENCODING'] = 'utf-8'
+        child_env['PYTHONUTF8'] = '1'
         try:
             proc = subprocess.run(
                 cmd, cwd=self.vendor_dir,
                 capture_output=True, text=True, encoding='utf-8',
                 errors='replace', timeout=self.config.timeout_seconds,
+                env=child_env,
             )
             self.proc_returncode = proc.returncode
             for line in (proc.stdout or '').splitlines():
