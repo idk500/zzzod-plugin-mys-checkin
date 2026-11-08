@@ -8,7 +8,9 @@
 |---|---|---|
 | 游戏签到 | ✅ 实机验证 | 2026-11-06 实机通过（含日志编码修复） |
 | 米游币打卡 / 库街区 | ✅ 已实现 | 随签到链路执行 |
-| GUI 配置页 | ❌ 未开发 | 配置改 yml |
+| GUI 配置页 | ✅ 实机验证 | 2026-11-08 实机通过：设置页内手机号验证码登录 + 签到选项 |
+
+![设置页](mys_checkin/assets/ui/setting_page.png)
 
 ![cover](mys_checkin/assets/ui/cover.png)
 
@@ -26,7 +28,10 @@
 
 ## 首次使用（只需一次登录）
 
-插件自带登录入口，**只用手机号 + 短信验证码**：
+两种登录入口，**只用手机号 + 短信验证码**：
+
+- **GUI 设置页（推荐）**：一条龙列表 → 米游社签到卡片右侧「设置」→ 输入手机号 → 发送验证码 → 输入 6 位短信码登录。登录后可在同一页面勾选签到游戏、开关米游币打卡、退出登录。
+- **CLI 交互**：
 
 ```bash
 python mys_checkin/mys_login.py           # 输入手机号 -> 收码 -> 输入 6 位验证码
@@ -57,7 +62,7 @@ python mys_checkin/mys_login.py status    # 核对登录态与权限
 | probe_mode | 关 | 打开后只运行 `checkin.py test` 查询登录/签到状态，不真实签到。仅用于排查，长期开着等于没签 |
 | timeout_seconds | 300 | 子进程超时（米游币多分区打卡较慢，可调大） |
 
-签到游戏列表 / 米游币开关 / 库街区开关在 `mys_checkin/vendor/config.json` 中调整：`mihoyo.game_sign`、`mihoyo.bbs_checkin`、`kuro.enabled`、`weibo.enabled`。
+米游币开关、签到游戏列表可在 **GUI 设置页**直接调整；库街区 / 微博等其余开关在 `mys_checkin/vendor/config.json` 中调整（`kuro.enabled`、`weibo.enabled`）。
 
 ## 运行结果
 
@@ -70,6 +75,8 @@ python mys_checkin/mys_login.py status    # 核对登录态与权限
 - 本插件不读取、不上传任何游戏内数据
 
 ## 更新记录
+
+- **0.2.0**：新增 GUI 设置页（`mys_checkin_app_setting.py` + `mys_checkin_setting_interface.py`）：一条龙列表内直接手机号验证码登录/退出登录、勾选签到游戏、开关米游币打卡；号码不落盘不进配置，登录与配置复用同一 vendored 内核。2026-11-08 实机验证通过（入口：一条龙运行 → 米游社签到卡片右侧齿轮）
 
 - **0.1.4**：登录模块与文档中的号码回显统一为省略号形式
 
